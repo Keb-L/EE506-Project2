@@ -1,21 +1,24 @@
 clear all; close all; clc;
 
-%%
-Ts = 0; % Sampling Rate
-Tb = 0; % Baud/Symbol Rate
-SNR = 0; % Signal to Noise Ratio
+%% Parameters
+Tsamp = 0; % Sampling period
+Tsym = 0; % Symbol period
+SNR = 0; % Signal to Noise Ratio (dB)
 Lt = 0; % Total time for simulation
 Ksig = 0; % Number of signal instances
 
-% Generate input signals (Raised Cosine or Sinc)
+%% Generate input signals (Raised Cosine or Sinc)
 % Uniformly sampled within Lt
 % Generate sampled plot (INI)
 
-% Transmitter + Channel Noise (AWGN)
+%% Generate pulse train
+
+
+%% Transmitter + Channel Noise (AWGN)
 % Generate input and input+noise plots
 % Normalize transmitted output
 
 
-% Receiver
+%% Receiver
 % Generate input+noise plot and Matched filter + thresholding
 
