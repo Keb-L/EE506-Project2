@@ -17,6 +17,7 @@ tsym = tsim(1:Tsym:end);    % Symbol timestamps
 
 % puls = sincpuls(Tsym, -5*Tsym:5*Tsym);
 puls = rtrcpuls(0.3, Tsym, -5*Tsym:5*Tsym);
+RCpulse = rcpulse(0.3, Tsym, -5*Tsym:5*Tsym);
 
 
 %% Generate pulse train
@@ -32,7 +33,8 @@ snr = 10^(SNRdB/10); snrA = sqrt(snr); % Compute SNR
 %% Transmitter + Channel Noise (AWGN)
 % Generate input and input+noise plots
 % Normalize transmitted output
-
+snoise = transmitter(snr,Ksig,Lt,puls);
+snoise2 = transmitter(snr,Ksig,Lt,RCpulse);
 
 %% Receiver
 % Generate input+noise plot and Matched filter + thresholding
