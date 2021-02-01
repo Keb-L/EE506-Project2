@@ -11,7 +11,7 @@ Ksig = 0; % Number of signal instances
 % Uniformly sampled within Lt
 % Generate sampled plot (INI)
 
-
+% Raised Cosine Pulse
 function y = rcpulse(a,t)
 
     tau = 1; % Symbol time
