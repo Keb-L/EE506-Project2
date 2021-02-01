@@ -1,33 +1,33 @@
-function snoise = transmitter(SNR, Ksig, Lt, s)
+function snoise = transmitter(SNR, Ksig, Lt, s,tsim)
     
 %     snr = 10^(SNRdB/10);
 %     sigma2n = 1; % Unit variance for noise
 %     sigmaN = sqrt(sigma2N); % Standard Deviation of the noise
     
     Ls = length(s);
-    Tsig = 1+floor((Lt-Ls)*rand(Ksig,1));
+    Tsig = 1+floor((Ls-Lt).*rand(Ksig,1));
     Tsig = sort(Tsig, 'ascend');
     Tsig = unique(Tsig);
     Ksig = length(Tsig);
     Tmarks = Ls-1+Tsig;
     
     hsig = zeros(Lt,1);
-    hsig(Tsig) = ones(Ksig,1);%These are the delay for each signal (or replica)
+    hsig(Tsig,:) = ones(Ksig,1); %These are the delay for each signal (or replica)
     Lhsig = length(hsig);
-    sall = filter(s,1,hsig);%the filter delays and superposes ieach copy
-    Lsall = length(sall);  %here we are using the impulse respionse of the filter to generate each delayed replica
+     sall = filter(s,1,hsig);%the filter delays and superposes ieach copy
+%     Lsall = length(sall);  %here we are using the impulse respionse of the filter to generate each delayed replica
     
     
     
-    snoise = s * SNR + randn(Lt,1); % add noise to input signal
-    t = [1:Lt]'; % time index
+    snoise = sall * SNR + randn(Lt,1); % add noise to input signal
+    %t = [1:Lt]'; % time index
     
     figure
     subplot(2,1,1) 
-    plot(t,s), title('Transmitted Signal W/O Noise')
+    plot(tsim,sall), title('Transmitted Signal W/O Noise')
     
-    sublot(2,1,2)
-    plot(t,snoise), title('Noisy(AWGN) Signal')
+    subplot(2,1,2)
+    plot(tsim,snoise), title('Noisy(AWGN) Signal')
     
 
 end
