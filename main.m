@@ -12,7 +12,7 @@ Ksig = 20; % Number of signal instances
 % Generate sampled plot (INI)
 
 % Time
-tsim = 0:Tsamp:Lt;  % Sampled simulation timestamps
+tsim = 0:Tsamp:Lt-1;  % Sampled simulation timestamps
 tsym = tsim(1:Tsym:end);    % Symbol timestamps
 
 % puls = sincpuls(Tsym, -5*Tsym:5*Tsym);
@@ -26,6 +26,7 @@ ds = datasample(tsym(1:end-10), Ksig, 'Replace', false); % get symbol timestamps
 h = zeros(1, Lt+1); h(ds+1) = 1; % Create impulse train
 
 sig = filter(puls, 1, h); % Create pulse train
+rcSig = filter(RCpulse, 1, h);
 
 snr = 10^(SNRdB/10); snrA = sqrt(snr); % Compute SNR
 
@@ -33,10 +34,12 @@ snr = 10^(SNRdB/10); snrA = sqrt(snr); % Compute SNR
 %% Transmitter + Channel Noise (AWGN)
 % Generate input and input+noise plots
 % Normalize transmitted output
-snoise = transmitter(snr,Ksig,Lt,puls);
-snoise2 = transmitter(snr,Ksig,Lt,RCpulse);
+snoise = transmitter(snr,Ksig,Lt,sig, tsim);
+snoise2 = transmitter(snr,Ksig,Lt,rcSig, tsim);
 
 %% Receiver
 % Generate input+noise plot and Matched filter + thresholding
 mfout = receiver(sig, snoise, tsim, snrA, puls);
+
+mfout2 = receiver(rcSig, snoise2, tsim, snrA, RCpulse);
 
