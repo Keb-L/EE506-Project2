@@ -34,8 +34,8 @@ snr = 10^(SNRdB/10); snrA = sqrt(snr); % Compute SNR
 %% Transmitter + Channel Noise (AWGN)
 % Generate input and input+noise plots
 % Normalize transmitted output
-snoise = transmitter(snrA,Ksig,Lt,sig, tsim);
-snoise2 = transmitter(snrA,Ksig,Lt,rcSig, tsim);
+snoise = transmitter(snrA,Ksig,Lt,puls, tsim);
+snoise2 = transmitter(snrA,Ksig,Lt,RCpulse, tsim);
 
 %% Receiver
 % Generate input+noise plot and Matched filter + thresholding
