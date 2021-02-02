@@ -19,7 +19,7 @@ function snoise = transmitter(SNR, Ksig, Lt, s,tsim)
     
     
     
-    snoise = s * SNR + randn(Lt+1,1); % add noise to input signal
+    snoise = s * SNR + (randn(Lt+1,1))'; % add noise to input signal
     %t = [1:Lt]'; % time index
     
     figure
