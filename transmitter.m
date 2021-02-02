@@ -24,10 +24,13 @@ function snoise = transmitter(SNR, Ksig, Lt, s,tsim)
     
     figure
     subplot(2,1,1) 
-    plot(tsim,sall), title('Transmitted Signal W/O Noise')
+    plot(tsim,sall), title('Transmitted Signal W/O Noise'), xlabel('Time')
+    ylabel('s(t)')
+    grid on
     
     subplot(2,1,2)
-    plot(tsim,snoise), title('Noisy(AWGN) Signal')
-    
+    plot(tsim,snoise), title('Noisy(AWGN) Signal'), xlabel('Time')
+    ylabel('s(t)')
+    grid on
 
 end
