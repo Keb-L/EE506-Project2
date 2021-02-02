@@ -9,17 +9,17 @@ function snoise = transmitter(SNR, Ksig, Lt, s,tsim)
     Tsig = sort(Tsig, 'ascend');
     Tsig = unique(Tsig);
     Ksig = length(Tsig);
-    Tmarks = Ls-1+Tsig;
+    %Tmarks = Ls-1+Tsig;
     
-    hsig = zeros(Lt,1);
+    hsig = zeros(Lt+1,1);
     hsig(Tsig,:) = ones(Ksig,1); %These are the delay for each signal (or replica)
-    Lhsig = length(hsig);
-     sall = filter(s,1,hsig);%the filter delays and superposes ieach copy
+    %Lhsig = length(hsig);
+    sall = filter(s,1,hsig);%the filter delays and superposes ieach copy
 %     Lsall = length(sall);  %here we are using the impulse respionse of the filter to generate each delayed replica
     
     
     
-    snoise = sall * SNR + randn(Lt,1); % add noise to input signal
+    snoise = sall * SNR + randn(Lt+1,1); % add noise to input signal
     %t = [1:Lt]'; % time index
     
     figure
