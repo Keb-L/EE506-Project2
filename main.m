@@ -12,7 +12,7 @@ Ksig = 20; % Number of signal instances
 % Generate sampled plot (INI)
 
 % Time
-tsim = 0:Tsamp:Lt-1;  % Sampled simulation timestamps
+tsim = 0:Tsamp:Lt;  % Sampled simulation timestamps
 tsym = tsim(1:Tsym:end);    % Symbol timestamps
 
 % puls = sincpuls(Tsym, -5*Tsym:5*Tsym);
@@ -34,8 +34,8 @@ snr = 10^(SNRdB/10); snrA = sqrt(snr); % Compute SNR
 %% Transmitter + Channel Noise (AWGN)
 % Generate input and input+noise plots
 % Normalize transmitted output
-snoise = transmitter(snr,Ksig,Lt,sig, tsim);
-snoise2 = transmitter(snr,Ksig,Lt,rcSig, tsim);
+snoise = transmitter(snrA,Ksig,Lt,sig, tsim);
+snoise2 = transmitter(snrA,Ksig,Lt,rcSig, tsim);
 
 %% Receiver
 % Generate input+noise plot and Matched filter + thresholding
