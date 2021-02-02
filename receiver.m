@@ -9,7 +9,7 @@ function mfout = receiver(sig, snoise, tsim, snrA, puls)
     mfout = filter(hmf,1,snoise);   % Apply correlation
     
     thresh = 0.8*snrA; % threshold at 80% of the max correlated value
-    MFidx = find(mfout > thresh); % Matched Filter response indices
+    MFidx = find(mfout >= thresh); % Matched Filter response indices
     
     % Plot the matched filter response + markers
     figure(); 
