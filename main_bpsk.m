@@ -16,9 +16,9 @@ Ksig = floor(Lt / Tbaud); % Number of signal instances
 % Time
 tsim = 0:dt:Lt;  % Sampled simulation timestamps
 
-% puls = rectangularPulse(-Tsym/2, Tsym/2, (-5*Tsym:dt:5*Tsym)) / sqrt(Tsym);
-% puls = sincpuls(Tsym, (-5*Tsym:dt:5*Tsym)) / sqrt(Tsym);
-puls = rtrcpuls(0.2, Tsym, (-5*Tsym:dt:5*Tsym));
+puls = rectangularPulse(-Tsym/2, Tsym/2, (-5*Tsym:dt:5*Tsym));
+% puls = sincpuls(Tsym, (-5*Tsym:dt:5*Tsym));
+% puls = rtrcpuls(0.2, Tsym, (-5*Tsym:dt:5*Tsym));
 % puls = rcpulse(0.2, Tsym,  (-5*Tsym:dt:5*Tsym));
 
 % Normalize puls
