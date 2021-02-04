@@ -30,6 +30,9 @@ figure;
 plot((-5*Tsym:dt:5*Tsym), puls, ...
      (-4*Tsym:dt:6*Tsym), puls, ...
      (-6*Tsym:dt:4*Tsym), puls);
+xlabel('Time');
+ylabel('Amplitude');
+ 
 
 %% Generate pulse train
 % Uniformly sample (without replacement) from symbol timestamps
@@ -48,6 +51,8 @@ snoise = sig * snrA + randn(1, length(tsim),1);
 
 figure;
 plot(tsim, snoise);
+xlabel('Time');
+ylabel('Amplitude');
 
 %% Receiver
 % Generate input+noise plot and Matched filter + thresholding
@@ -60,6 +65,8 @@ mfnorm = mfout ./ mfpeak; % Normalize
 
 figure;
 plot(tsim, mfout);
+xlabel('Time');
+ylabel('Amplitude');
 
 % Sampler
 % mfsamp = mfout(1:1/dt:end)./mfpeak;
@@ -70,18 +77,18 @@ plot(tsim, mfout);
 eps = round(0*Tsym)/dt;
 
 winL = 0.5;
-win = 1+(10-winL)*Tsym/dt:(10+winL)*Tsym/dt;
+win = (1+(10-winL)*Tsym/dt:(10+winL)*Tsym/dt)+ Tbaud/dt;
 
 % Get data bits
-mfbit = zeros(1, Ksig-0.1*Ksig);
+mfbit = zeros(1, Ksig-0.1*Ksig-1);
 
 figure; hold on;
-for i = 0:Ksig-1-0.1*Ksig % Drop the last one
+for i = 1:Ksig-1-0.1*Ksig % Drop the last one
     mfsym = mfnorm(win - eps); % MATLAB 1-indexing 
 %     mfsym = mfnorm(win + 1); % MATLAB 1-indexing 
     plot(mfsym);
     
-    mfbit(i+1) = mfsym(winL*Tsym/dt+1);
+    mfbit(i) = mfsym(winL*Tsym/dt+1);
     
     % Increment window
     win = win + Tbaud/dt;
